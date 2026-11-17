@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IT3711 - Summer Internship Report - Abinaya R (511323205001)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Times+New+Roman&display=swap');
+
+    @page {
+      size: A4;
+      margin: 25mm 20mm 25mm 25mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #111827;
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: sans-serif;
+      font-size: 14px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .print-btn {
+      background: #10b981;
+      color: #022c22;
+      border: none;
+      padding: 8px 18px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+
+    .print-btn:hover {
+      background: #34d399;
+    }
+
+    .report-container {
+      max-width: 820px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 50px 60px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.06);
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .report-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .page-break {
+        page-break-after: always;
+        break-after: page;
+      }
+      .page-border {
+        border: 2px solid #111827;
+        padding: 40px;
+        min-height: 98vh;
+      }
+    }
+
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+      margin-bottom: 40px;
+    }
+
+    .page-border {
+      border: 1.5px solid #1f2937;
+      padding: 45px 40px;
+      min-height: 1000px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-justify {
+      text-align: justify;
+    }
+
+    h1, h2, h3, h4 {
+      color: #000000;
+      margin-top: 0;
+    }
+
+    .college-header h2 {
+      font-size: 18pt;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .college-header p {
+      font-size: 10pt;
+      margin: 2px 0;
+    }
+
+    .title-box {
+      margin: 60px 0;
+    }
+
+    .title-box h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .title-box h3 {
+      font-size: 13pt;
+      font-weight: normal;
+      margin-top: 15px;
+    }
+
+    .submit-block {
+      margin-top: auto;
+      font-size: 12pt;
+    }
+
+    .certificate-content {
+      font-size: 13pt;
+      line-height: 2;
+      text-align: justify;
+      margin: 60px 0;
+    }
+
+    .sig-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 120px;
+      padding: 0 20px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 10.5pt;
+    }
+
+    table, th, td {
+      border: 1px solid #374151;
+    }
+
+    th {
+      background-color: #f3f4f6;
+      font-weight: bold;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+    }
+
+    .toc-table td {
+      border: none;
+      padding: 4px 6px;
+    }
+
+    .toc-table tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .chapter-title {
+      font-size: 15pt;
+      font-weight: bold;
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 13pt;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    .subsection-title {
+      font-size: 11.5pt;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 10px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 8px 0 14px 25px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      text-align: justify;
+    }
+
+    .code-preview {
+      background: #f1f5f9;
+      border-left: 3px solid #0284c7;
+      padding: 10px 14px;
+      font-family: Consolas, monospace;
+      font-size: 9.5pt;
+      margin: 15px 0;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Top Bar with 1-Click Print to PDF -->
+  <div class="no-print-bar">
+    <div>
+      <strong>SpendWise Internship Project Report</strong> — Abinaya R (511323205001)
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <div class="report-container">
+
+    <!-- PAGE 1: OUTER COVER PAGE -->
+    <div class="page-break">
+      <div class="page-border">
+        
+        <div class="college-header text-center">
+          <h2>KINGSTON ENGINEERING COLLEGE</h2>
+          <p><strong>Approved by AICTE, New Delhi | Affiliated to Anna University, Chennai</strong></p>
+          <p><strong>Accredited with 'A' Grade by NAAC</strong></p>
+          <p>Chittoor Main Road, Christianpet, Vellore – 632 059</p>
+        </div>
+
+        <div style="margin: 90px 0 30px 0;" class="text-center">
+          <h2 style="font-size: 15pt; font-weight: bold; letter-spacing: 0.5px;">DEPARTMENT OF INFORMATION TECHNOLOGY</h2>
+          <br><br>
+          <h3 style="font-size: 14pt; font-weight: bold; text-decoration: underline;">IT3711 – SUMMER INTERNSHIP REPORT</h3>
+        </div>
+
+        <div class="submit-block text-center" style="margin-bottom: 30px;">
+          <p style="font-style: italic; margin-bottom: 25px;">Submitted by</p>
+          <p style="font-size: 13pt; font-weight: bold; margin: 4px 0;">Name: Abinaya R</p>
+          <p style="font-size: 13pt; font-weight: bold; margin: 4px 0;">Register No: 511323205001</p>
+          <p style="font-size: 12pt; font-weight: bold; margin: 4px 0;">Semester: VII</p>
+          <p style="font-size: 12pt; font-weight: bold; margin: 4px 0;">Department: INFORMATION TECHNOLOGY</p>
+        </div>
+
+        <div class="text-center" style="font-size: 11pt; font-weight: bold; margin-top: 40px;">
+          ACADEMIC YEAR: 2026 - 2027
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE 2: INNER TITLE PAGE -->
+    <div class="page-break">
+      <div class="page-border">
+        
+        <div class="text-center title-box">
+          <h1>Web-Based Expense Tracker and Financial Analytics Platform with Real-Time Currency Intelligence<br>(SpendWise)</h1>
+          <h3>Developed during the Summer Internship Programme 2026</h3>
+        </div>
+
+        <div class="text-center" style="margin: 40px 0;">
+          <h3 style="font-size: 14pt; font-weight: bold;">INTERNSHIP REPORT</h3>
+          <p style="font-style: italic; margin-top: 15px;">Submitted by</p>
+          <p style="font-size: 14pt; font-weight: bold; margin: 6px 0;">ABINAYA R</p>
+          <p style="font-size: 13pt; font-weight: bold; margin: 4px 0;">(511323205001)</p>
+          <p style="font-style: italic; margin-top: 25px; line-height: 1.6;">
+            in partial fulfilment for the award of the degree<br>of
+          </p>
+          <p style="font-size: 13pt; font-weight: bold; margin-top: 15px;">BACHELOR OF TECHNOLOGY</p>
+          <p style="font-style: italic; margin: 4px 0;">in</p>
+          <p style="font-size: 13pt; font-weight: bold;">INFORMATION TECHNOLOGY</p>
+        </div>
+
+        <div class="text-center submit-block">
+          <p style="font-size: 12pt; font-weight: bold; margin: 3px 0;">KINGSTON ENGINEERING COLLEGE, VELLORE</p>
+          <p style="font-size: 12pt; font-weight: bold; margin: 3px 0;">ANNA UNIVERSITY : CHENNAI 600 025</p>
+          <p style="font-size: 12pt; font-weight: bold; margin-top: 12px;">[2026 - 2027]</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE 3: BONAFIDE CERTIFICATE -->
+    <div class="page-break">
+      <div class="page-border">
+        
+        <div class="college-header text-center">
+          <h2>KINGSTON ENGINEERING COLLEGE</h2>
+          <p><strong>Approved by AICTE, New Delhi | Affiliated to Anna University, Chennai</strong></p>
+          <p><strong>Accredited with 'A' Grade by NAAC</strong></p>
+          <p>Chittoor Main Road, Christianpet, Vellore – 632 059</p>
+        </div>
+
+        <div style="margin-top: 50px;" class="text-center">
+          <h3 style="font-size: 14pt; font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</h3>
+          <br>
+          <h2 style="font-size: 16pt; font-weight: bold; text-decoration: underline;">BONAFIDE CERTIFICATE</h2>
+        </div>
+
+        <div class="certificate-content">
+          Certified that this Internship report <strong>“Web-Based Expense Tracker and Financial Analytics Platform with Real-Time Currency Intelligence (SpendWise)”</strong> is the bonafide work of <strong>“ABINAYA R (511323205001)”</strong> who carried out the internship work under my supervision during the academic year 2026-2027.
+        </div>
+
+        <div class="sig-row">
+          <div class="text-center">
+            <p>_________________________________</p>
+            <p><strong>Signature of Head of the Department</strong></p>
+            <p>Mrs. M. Menaka, M.Tech., (Ph.D)</p>
+          </div>
+          <div class="text-center">
+            <p>_________________________________</p>
+            <p><strong>Signature of the Staff In-charge</strong></p>
+            <p>Dr. M. Vasumathy, MS(SE)., Ph.D</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE 4: ACKNOWLEDGEMENT -->
+    <div class="page-break">
+      <div class="page-border" style="min-height: auto;">
+        
+        <div class="text-center" style="margin-bottom: 25px;">
+          <h2 style="font-size: 15pt; font-weight: bold; text-decoration: underline;">ACKNOWLEDGEMENT</h2>
+        </div>
+
+        <p>My sincere thanks and profound sense of gratitude go to our respected Chairman <strong>Thiru. D.M. Kathir Anand, MBA (USA)</strong> for all his relentless efforts in educating me in a premier institution.</p>
+
+        <p>I would like to express my sincere gratitude to our respected Principal <strong>Dr. U.V. ARIVAZHAGU, M.E., Ph.D.</strong>, for her invaluable guidance, support, and constant encouragement throughout my academic journey.</p>
+
+        <p>I extend my heartfelt thanks to the Head of the Department, <strong>Mrs. M. Menaka, M.Tech., (Ph.D.)</strong>, Department of Information Technology, for her guidance, advice, and motivation all through the internship period.</p>
+
+        <p>I convey my sincere and in-depth gratitude to our internal guide <strong>Dr. M. Vasumathy, MS(SE)., Ph.D.</strong>, Associate Professor, for her valuable guidance, constructive critiques, and continuous support throughout the duration of this internship project.</p>
+
+        <p>I would also like to thank all faculty members of the Department of Information Technology, friends, and fellow batchmates for their cooperation and assistance during the course of this internship.</p>
+
+        <p>I am deeply indebted to my parents and family members whose unwavering moral support, sacrifices, and encouragement enabled me to complete this internship successfully. Above all, I thank the Almighty God for giving me good health, wisdom, and strength to carry out this project without difficulties and to achieve this milestone.</p>
+
+        <div style="margin-top: 40px; text-align: right;">
+          <p><strong>Abinaya R</strong><br>(Register No: 511323205001)</p>
+        </div>
+
+        <div class="text-center" style="margin-top: auto; font-style: italic;">i</div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: ABSTRACT -->
+    <div class="page-break">
+      <div class="page-border" style="min-height: auto;">
+        
+        <div class="text-center" style="margin-bottom: 25px;">
+          <h2 style="font-size: 15pt; font-weight: bold; text-decoration: underline;">ABSTRACT</h2>
+        </div>
+
+        <p>This report presents the technical design, development, and implementation work carried out during the eight-week Summer Internship, which commenced on 29 June 2026. The objective of the internship was to engineer a robust, production-grade <strong>Web-Based Expense Tracker and Financial Analytics Platform</strong>, designated <strong>SpendWise</strong>. The platform addresses the critical challenge of personal financial management by providing an intuitive, transparent, and data-driven web portal that enables individuals to log monetary expenditures, categorize financial streams, monitor multi-month budgets, inspect interactive analytical charts, and dynamically convert financial values across global currencies.</p>
+
+        <p>The system is engineered as an end-to-end full-stack application. The backend is developed using <strong>Node.js and Express.js (v4.21)</strong> resting upon an embedded <strong>SQLite3</strong> relational database. The backend employs a modular MVC controller-service architecture, structured parameter validation, robust SQL aggregations, and RESTful routing exposing endpoints for transaction lifecycle management, financial summary computations, monthly trend aggregations, category breakdowns, and category budget enforcement. To deliver reliable multi-currency calculations without third-party rate limits, the backend integrates with an external open exchange rate API with a 1-hour in-memory cache and automatic fallback datasets.</p>
+
+        <p>The frontend is built using <strong>React 18</strong> bundled with <strong>Vite</strong>, written in modern modular JavaScript and styled using <strong>Tailwind CSS</strong>. Data visualization is powered by <strong>Recharts</strong>, delivering responsive, interactive monthly income vs. expense comparison charts (switchable between Bar and Area modes) and category expense distribution Donut charts with custom tooltips. Key functional components include responsive KPI summary cards (Net Balance, Total Income, Total Expenses, and Savings Rate), a category-wise monthly budget tracker with automated color-coded alert badges (Safe, Warning, Exceeded), a live currency converter calculator widget, a multi-parameter transaction filtering engine, instant CSV export capabilities, and a 1-click realistic demo data seeder.</p>
+
+        <p>The report describes the project architecture and the activities of each of the eight weeks, explains each module in detail, discusses the challenges encountered and their solutions, and summarises the technical and professional skills gained. The internship provided a strong practical foundation in full-stack development and in the engineering of a complete, data-driven financial application.</p>
+
+        <div class="text-center" style="margin-top: auto; font-style: italic;">ii</div>
+      </div>
+    </div>
+
+    <!-- PAGE 6: TABLE OF CONTENTS -->
+    <div class="page-break">
+      <div class="page-border" style="min-height: auto;">
+        
+        <div class="text-center" style="margin-bottom: 20px;">
+          <h2 style="font-size: 15pt; font-weight: bold;">TABLE OF CONTENTS</h2>
+        </div>
+
+        <table class="toc-table">
+          <thead>
+            <tr style="border-bottom: 1.5px solid #000;">
+              <th style="width: 10%;">S.NO</th>
+              <th style="width: 75%;">CONTENT</th>
+              <th style="width: 15%; text-align: right;">PG NO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td><strong>INTRODUCTION</strong></td><td align="right"><strong>1</strong></td></tr>
+            <tr><td></td><td>1.1 Background of the Internship</td><td align="right">1</td></tr>
+            <tr><td></td><td>1.2 Objectives of the Project</td><td align="right">1</td></tr>
+            <tr><td></td><td>1.3 Problem Statement & Domain Context</td><td align="right">2</td></tr>
+            <tr><td></td><td>1.4 Scope of the Work</td><td align="right">2</td></tr>
+            <tr><td></td><td>1.5 Organisation of the Report</td><td align="right">2</td></tr>
+
+            <tr><td><strong>2</strong></td><td><strong>PROJECT OVERVIEW AND SYSTEM ARCHITECTURE</strong></td><td align="right"><strong>3</strong></td></tr>
+            <tr><td></td><td>2.1 Project Overview</td><td align="right">3</td></tr>
+            <tr><td></td><td>2.2 System Architecture</td><td align="right">3</td></tr>
+            <tr><td></td><td>2.3 Technology Stack</td><td align="right">4</td></tr>
+            <tr><td></td><td>2.4 Database Design and Relational Schema</td><td align="right">4</td></tr>
+            <tr><td></td><td>2.5 Security and Data Integrity Design</td><td align="right">5</td></tr>
+
+            <tr><td><strong>3</strong></td><td><strong>WEEK 1 – REQUIREMENT ANALYSIS AND ENVIRONMENT SETUP</strong></td><td align="right"><strong>6</strong></td></tr>
+            <tr><td></td><td>3.1 Domain Study and Workflow Identification</td><td align="right">6</td></tr>
+            <tr><td></td><td>3.2 Technology Selection and Rationale</td><td align="right">6</td></tr>
+            <tr><td></td><td>3.3 Development Environment Setup</td><td align="right">7</td></tr>
+            <tr><td></td><td>3.4 Initial Architecture Blueprint</td><td align="right">7</td></tr>
+            <tr><td></td><td>3.5 Outcome of Week 1</td><td align="right">7</td></tr>
+
+            <tr><td><strong>4</strong></td><td><strong>WEEK 2 – DATABASE MODELLING AND REST API FOUNDATION</strong></td><td align="right"><strong>8</strong></td></tr>
+            <tr><td></td><td>4.1 SQLite Relational Schema Implementation</td><td align="right">8</td></tr>
+            <tr><td></td><td>4.2 Promise-Based Database Layer</td><td align="right">8</td></tr>
+            <tr><td></td><td>4.3 RESTful Controller-Service Architecture</td><td align="right">8</td></tr>
+            <tr><td></td><td>4.4 Transaction CRUD Endpoints</td><td align="right">9</td></tr>
+            <tr><td></td><td>4.5 Outcome of Week 2</td><td align="right">9</td></tr>
+
+            <tr><td><strong>5</strong></td><td><strong>WEEK 3 – TRANSACTION MANAGEMENT ENGINE AND CSV EXPORT</strong></td><td align="right"><strong>10</strong></td></tr>
+            <tr><td></td><td>5.1 Advanced Query Filtering and SQL Parameterization</td><td align="right">10</td></tr>
+            <tr><td></td><td>5.2 Real-Time Keyword Search Implementation</td><td align="right">10</td></tr>
+            <tr><td></td><td>5.3 Input Validation and Error Sanitization</td><td align="right">11</td></tr>
+            <tr><td></td><td>5.4 CSV Data Export Endpoint Generation</td><td align="right">11</td></tr>
+            <tr><td></td><td>5.5 Outcome of Week 3</td><td align="right">11</td></tr>
+
+            <tr><td><strong>6</strong></td><td><strong>WEEK 4 – FINANCIAL ANALYTICS AND BUDGETING LOGIC</strong></td><td align="right"><strong>12</strong></td></tr>
+            <tr><td></td><td>6.1 Summary Metrics Aggregation Algorithms</td><td align="right">12</td></tr>
+            <tr><td></td><td>6.2 Multi-Month Cash Flow Trend Calculations</td><td align="right">12</td></tr>
+            <tr><td></td><td>6.3 Category Breakdown Aggregations</td><td align="right">13</td></tr>
+            <tr><td></td><td>6.4 Monthly Category Budgeting and Threshold Alerts</td><td align="right">13</td></tr>
+            <tr><td></td><td>6.5 Mid-Term Review Milestone</td><td align="right">14</td></tr>
+          </tbody>
+        </table>
+
+        <div class="text-center" style="margin-top: auto; font-style: italic;">iii</div>
+      </div>
+    </div>
+
+    <!-- PAGE 7: TABLE OF CONTENTS (CONT.) -->
+    <div class="page-break">
+      <div class="page-border" style="min-height: auto;">
+        
+        <table class="toc-table">
+          <thead>
+            <tr style="border-bottom: 1.5px solid #000;">
+              <th style="width: 10%;">S.NO</th>
+              <th style="width: 75%;">CONTENT</th>
+              <th style="width: 15%; text-align: right;">PG NO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>7</strong></td><td><strong>WEEK 5 – REACT FRONTEND ARCHITECTURE AND KPI METRICS</strong></td><td align="right"><strong>15</strong></td></tr>
+            <tr><td></td><td>7.1 Single Page Application Scaffolding with Vite</td><td align="right">15</td></tr>
+            <tr><td></td><td>7.2 Tailwind CSS Configuration and Design System</td><td align="right">15</td></tr>
+            <tr><td></td><td>7.3 Centralized Axios API Service Layer</td><td align="right">16</td></tr>
+            <tr><td></td><td>7.4 Dynamic KPI Summary Cards Component</td><td align="right">16</td></tr>
+            <tr><td></td><td>7.5 Outcome of Week 5</td><td align="right">16</td></tr>
+
+            <tr><td><strong>8</strong></td><td><strong>WEEK 6 – DATA VISUALIZATION AND BUDGET TRACKER UI</strong></td><td align="right"><strong>17</strong></td></tr>
+            <tr><td></td><td>8.1 Recharts Integration for Financial Trends</td><td align="right">17</td></tr>
+            <tr><td></td><td>8.2 Interactive Donut Chart for Category Distribution</td><td align="right">17</td></tr>
+            <tr><td></td><td>8.3 Category Budget Progress Tracker Component</td><td align="right">18</td></tr>
+            <tr><td></td><td>8.4 Add/Edit Transaction Modal Dialog</td><td align="right">18</td></tr>
+            <tr><td></td><td>8.5 Outcome of Week 6</td><td align="right">19</td></tr>
+
+            <tr><td><strong>9</strong></td><td><strong>WEEK 7 – CURRENCY EXCHANGE API AND GLOBAL CONVERTER</strong></td><td align="right"><strong>20</strong></td></tr>
+            <tr><td></td><td>9.1 Third-Party Exchange Rate API Integration</td><td align="right">20</td></tr>
+            <tr><td></td><td>9.2 In-Memory Caching Strategy and Offline Fallback</td><td align="right">20</td></tr>
+            <tr><td></td><td>9.3 Global React Currency Context Provider</td><td align="right">21</td></tr>
+            <tr><td></td><td>9.4 Interactive Currency Converter Widget</td><td align="right">21</td></tr>
+            <tr><td></td><td>9.5 Outcome of Week 7</td><td align="right">22</td></tr>
+
+            <tr><td><strong>10</strong></td><td><strong>WEEK 8 – INTEGRATION, SEEDING, TESTING AND REVIEW</strong></td><td align="right"><strong>23</strong></td></tr>
+            <tr><td></td><td>10.1 Automated Realistic Demo Data Seeder</td><td align="right">23</td></tr>
+            <tr><td></td><td>10.2 Full-Stack System Integration</td><td align="right">23</td></tr>
+            <tr><td></td><td>10.3 Comprehensive End-to-End Testing</td><td align="right">24</td></tr>
+            <tr><td></td><td>10.4 Production Build Optimization</td><td align="right">24</td></tr>
+            <tr><td></td><td>10.5 Final Review and Documentation</td><td align="right">24</td></tr>
+
+            <tr><td><strong>11</strong></td><td><strong>MODULE-WISE FUNCTIONAL DESCRIPTION</strong></td><td align="right"><strong>25</strong></td></tr>
+            <tr><td></td><td>11.1 Transaction Lifecycle Management Module</td><td align="right">25</td></tr>
+            <tr><td></td><td>11.2 Financial Visual Analytics Module</td><td align="right">26</td></tr>
+            <tr><td></td><td>11.3 Budgeting and Alert Notification Module</td><td align="right">27</td></tr>
+            <tr><td></td><td>11.4 Global Currency Conversion Intelligence Module</td><td align="right">28</td></tr>
+            <tr><td></td><td>11.5 Data Export and Seeder Utilities Module</td><td align="right">29</td></tr>
+
+            <tr><td><strong>12</strong></td><td><strong>CHALLENGES FACED AND SOLUTIONS ADOPTED</strong></td><td align="right"><strong>30</strong></td></tr>
+            <tr><td></td><td>12.1 Cross-Origin Requests and Dev Proxying</td><td align="right">30</td></tr>
+            <tr><td></td><td>12.2 External Currency API Latency and Rate Limiting</td><td align="right">30</td></tr>
+            <tr><td></td><td>12.3 Complex Multi-Currency Metric Conversions</td><td align="right">30</td></tr>
+            <tr><td></td><td>12.4 Responsive Data Visualization Rendering</td><td align="right">31</td></tr>
+
+            <tr><td><strong>13</strong></td><td><strong>LEARNING OUTCOMES AND SKILLS ACQUIRED</strong></td><td align="right"><strong>32</strong></td></tr>
+            <tr><td></td><td>13.1 Technical Proficiencies</td><td align="right">32</td></tr>
+            <tr><td></td><td>13.2 Software Engineering Practices</td><td align="right">32</td></tr>
+            <tr><td></td><td>13.3 Problem Solving and Analytical Thinking</td><td align="right">33</td></tr>
+
+            <tr><td><strong>14</strong></td><td><strong>CONCLUSION AND FUTURE SCOPE</strong></td><td align="right"><strong>34</strong></td></tr>
+            <tr><td></td><td>14.1 Conclusion</td><td align="right">34</td></tr>
+            <tr><td></td><td>14.2 Future Scope</td><td align="right">34</td></tr>
+          </tbody>
+        </table>
+
+        <div class="text-center" style="margin-top: auto; font-style: italic;">iv</div>
+      </div>
+    </div>
+
+    <!-- REPORT BODY: CHAPTER 1 -->
+    <div class="page-break">
+      <h2 class="chapter-title">1. INTRODUCTION</h2>
+      
+      <h3 class="section-title">1.1 Background of the Internship</h3>
+      <p>In modern technical education, hands-on industrial and project-based experience is essential to bridge academic theory with real-world software engineering practices. As part of the Bachelor of Technology in Information Technology curriculum under Anna University at Kingston Engineering College, the course <strong>IT3711 – Summer Internship</strong> serves as an intensive practical training ground. The internship took place over an eight-week duration during the academic period 2026–2027.</p>
+      <p>The internship assignment focused on conceptualizing, architecting, developing, testing, and deploying a complete, production-grade web application: <strong>SpendWise</strong>, a full-stack personal finance and expense analytics platform. The project provided thorough exposure to the end-to-end software development lifecycle (SDLC), including requirements gathering, relational database normalization, server-side REST API development, asynchronous client-side state management, interactive data visualization, and third-party API integration.</p>
+
+      <h3 class="section-title">1.2 Objectives of the Project</h3>
+      <p>The primary objectives established for the SpendWise platform comprise:</p>
+      <ul>
+        <li><strong>Accurate Transaction Logging:</strong> Enable users to seamlessly record and manage financial transactions with comprehensive metadata, including transaction amount, type (Income or Expense), category, date, payment method, and descriptive notes.</li>
+        <li><strong>Visual Financial Analytics:</strong> Provide graphical intelligence on cash flows through multi-month trends and category spending distributions using interactive charting libraries.</li>
+        <li><strong>Proactive Budget Monitoring:</strong> Implement category-specific monthly budget caps accompanied by visual indicators and automated threshold alerts (Safe, Warning, Exceeded) to prevent financial overspending.</li>
+        <li><strong>Real-Time Currency Conversion:</strong> Integrate external live exchange rate services with an in-memory caching mechanism to enable seamless on-the-fly dashboard currency recalculation.</li>
+        <li><strong>Data Portability:</strong> Enable instant export of historical transactions into industry-standard CSV format for spreadsheet auditing and personal record keeping.</li>
+        <li><strong>Zero-Configuration Relational Persistence:</strong> Utilize an embedded, high-performance SQLite relational database to ensure self-contained portability without requiring manual database server configuration.</li>
+      </ul>
+
+      <h3 class="section-title">1.3 Problem Statement & Domain Context</h3>
+      <p>Personal financial stability requires transparent visibility into daily spending patterns. Traditional expense tracking approaches—such as physical paper diaries, static spreadsheet templates, or complex commercial banking software—suffer from several significant limitations: high friction, lack of real-time intelligence, absence of currency versatility, and data clutter. SpendWise addresses these shortcomings by integrating logging, automated SQL analytics, interactive visualizations, and live currency rates into a unified single-page web application.</p>
+
+      <h3 class="section-title">1.4 Scope of the Work</h3>
+      <p>The project scope encompassed requirements gathering, relational database modeling, Node.js/Express.js backend development, React 18 client-side interface construction, Recharts data visualization, external currency API integration, automated demo seeding, and rigorous verification testing.</p>
+
+      <h3 class="section-title">1.5 Organisation of the Report</h3>
+      <p>The report follows the eight-week development progression. Chapter 2 describes the project architecture. Chapters 3 to 10 chronicle Weeks 1 to 8 respectively. Chapter 11 details module-wise functional specifications. Chapter 12 discusses challenges and solutions, Chapter 13 outlines skills acquired, and Chapter 14 concludes the report.</p>
+    </div>
+
+    <!-- CHAPTER 2 -->
+    <div class="page-break">
+      <h2 class="chapter-title">2. PROJECT OVERVIEW AND SYSTEM ARCHITECTURE</h2>
+      
+      <h3 class="section-title">2.1 Project Overview</h3>
+      <p>SpendWise is architected as an enterprise-patterned full-stack web application. It cleanly decouples the presentation tier (built in React 18 with Vite and Tailwind CSS) from the backend API services (powered by Node.js and Express.js) and data persistence tier (SQLite3).</p>
+
+      <h3 class="section-title">2.2 System Architecture</h3>
+      <p>The architecture adopts a 4-layer design:</p>
+      <ul>
+        <li><strong>Presentation Layer:</strong> React components providing responsive visual interfaces, custom charting, and global currency context.</li>
+        <li><strong>Application Layer:</strong> Express.js handling routing, input validation, SQL query preparation, and metric calculations.</li>
+        <li><strong>Integration Layer:</strong> External exchange rate API client with 1-hour in-memory cache and offline fallback dataset.</li>
+        <li><strong>Persistence Layer:</strong> Relational SQLite3 database storing transactions, budgets, and categories.</li>
+      </ul>
+
+      <h3 class="section-title">2.3 Technology Stack</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Technology</th>
+            <th>Version</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Frontend</td><td>React.js</td><td>18.3.1</td><td>Component-based UI</td></tr>
+          <tr><td>Build Tool</td><td>Vite</td><td>5.4.11</td><td>Fast bundling and HMR</td></tr>
+          <tr><td>Styling</td><td>Tailwind CSS</td><td>3.4.17</td><td>Responsive utility styling</td></tr>
+          <tr><td>Charting</td><td>Recharts</td><td>2.13.0</td><td>Interactive SVG/HTML5 charts</td></tr>
+          <tr><td>Icons</td><td>Lucide React</td><td>1.72.0</td><td>Iconography</td></tr>
+          <tr><td>HTTP Client</td><td>Axios</td><td>1.7.9</td><td>API communication</td></tr>
+          <tr><td>Backend</td><td>Node.js & Express</td><td>22.17 / 4.21</td><td>RESTful API service</td></tr>
+          <tr><td>Database</td><td>SQLite3</td><td>5.1.7</td><td>Embedded relational database</td></tr>
+          <tr><td>Currency API</td><td>Open Exchange Rates</td><td>v6</td><td>Live foreign exchange rates</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="section-title">2.4 Database Design</h3>
+      <p>The database schema utilizes three normalized relational tables: <code>transactions</code>, <code>budgets</code>, and <code>categories</code>, with strict data type checking and foreign key constraints.</p>
+    </div>
+
+    <!-- CHAPTER 3 & 4 -->
+    <div class="page-break">
+      <h2 class="chapter-title">3. WEEK 1 – REQUIREMENT ANALYSIS AND ENVIRONMENT SETUP</h2>
+      <p>Week 1 (29 June 2026 – 5 July 2026) was dedicated to domain study, requirement specifications, and environment setup. Key personal finance workflows were modeled, architectural boundaries between client and server were established, and development tooling (Node.js, npm, Git) was configured on Windows x64.</p>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">4. WEEK 2 – DATABASE MODELLING AND REST API FOUNDATION</h2>
+      <p>Week 2 (6 July 2026 – 12 July 2026) established the data foundation. In <code>server/src/db/database.js</code>, SQLite database initialization scripts were created. Asynchronous wrapper helpers (<code>dbRun</code>, <code>dbGet</code>, <code>dbAll</code>) were developed to enable clean async/await syntax. Initial REST endpoints for transactions and health checks were implemented and verified.</p>
+    </div>
+
+    <!-- CHAPTER 5 & 6 -->
+    <div class="page-break">
+      <h2 class="chapter-title">5. WEEK 3 – TRANSACTION ENGINE AND CSV EXPORT</h2>
+      <p>Week 3 (13 July 2026 – 19 July 2026) expanded the transaction management controller. Dynamic parameterized SQL filtering was engineered to support real-time text searching across notes, category filters, transaction type toggles (expense/income), and date range limits. A dedicated CSV export endpoint (<code>GET /api/export/csv</code>) was implemented to stream formatted transaction spreadsheets directly to the user.</p>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">6. WEEK 4 – FINANCIAL ANALYTICS AND BUDGETING LOGIC</h2>
+      <p>Week 4 (20 July 2026 – 26 July 2026) focused on financial analytics. SQL aggregation queries were developed in <code>analyticsController.js</code> to compute Net Balance, Savings Rate, and month-over-month percentage changes. Multi-month cash flow trends were grouped using SQLite's <code>strftime('%Y-%m', date)</code>. Category budgeting logic was established to compute percentage consumption and classify statuses into Safe, Warning, and Exceeded.</p>
+    </div>
+
+    <!-- CHAPTER 7 & 8 -->
+    <div class="page-break">
+      <h2 class="chapter-title">7. WEEK 5 – REACT FRONTEND ARCHITECTURE AND KPI METRICS</h2>
+      <p>Week 5 (27 July 2026 – 2 August 2026) initiated frontend construction. Vite and React 18 were configured with Tailwind CSS. A centralized Axios service (<code>api.js</code>) was created with internal development proxying. The <code>SummaryCards.jsx</code> component was developed to display four executive KPI cards with pulse loading states.</p>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">8. WEEK 6 – DATA VISUALIZATION AND BUDGET TRACKER UI</h2>
+      <p>Week 6 (3 August 2026 – 9 August 2026) delivered visual analytics. Recharts was integrated in <code>ChartsSection.jsx</code> to render monthly cash flow trends (toggleable between Bar and Area views) and an interactive category distribution Donut chart. The <code>BudgetProgress.jsx</code> component was built with color-coded alert indicators and inline budget editing.</p>
+    </div>
+
+    <!-- CHAPTER 9 & 10 -->
+    <div class="page-break">
+      <h2 class="chapter-title">9. WEEK 7 – CURRENCY EXCHANGE API AND CONVERTER WIDGET</h2>
+      <p>Week 7 (10 August 2026 – 16 August 2026) implemented multi-currency intelligence. The backend was connected to live exchange rate APIs with a 1-hour in-memory cache and offline fallback. A global <code>CurrencyContext.jsx</code> provider was built to dynamically recalculate all dashboard figures across eight world currencies. An interactive <code>CurrencyConverter.jsx</code> calculator widget was created.</p>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">10. WEEK 8 – INTEGRATION, SEEDING, TESTING AND REVIEW</h2>
+      <p>Week 8 (17 August 2026 – 23 August 2026) finalized the platform. An automated realistic demo data seeder was created with 34 multi-month transactions. Full-stack integration was completed, and comprehensive end-to-end tests confirmed all endpoints and calculations. The frontend production build succeeded with zero errors (2,759 modules transformed).</p>
+    </div>
+
+    <!-- CHAPTER 11 & 12 -->
+    <div class="page-break">
+      <h2 class="chapter-title">11. MODULE-WISE FUNCTIONAL DESCRIPTION</h2>
+      <p>SpendWise is composed of five core modules:</p>
+      <ul>
+        <li><strong>Transaction Lifecycle Management:</strong> Add, edit, delete, search, and filter expenses and income streams with full input validation.</li>
+        <li><strong>Financial Visual Analytics:</strong> Real-time KPI summaries, interactive Recharts cash flow trends, and category expense distribution Donut charts.</li>
+        <li><strong>Category Budgeting & Alerts:</strong> Category spending boundaries with visual progress indicators and threshold alert badges.</li>
+        <li><strong>Global Currency Intelligence:</strong> Real-time exchange rate fetching, 1-hour server caching, dashboard recalculation, and conversion calculator.</li>
+        <li><strong>Data Portability & Utilities:</strong> 1-click CSV export and sample data generator.</li>
+      </ul>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">12. CHALLENGES FACED AND SOLUTIONS ADOPTED</h2>
+      <p>Key engineering challenges encountered during the internship included:</p>
+      <ul>
+        <li><strong>CORS & Dev Proxying:</strong> Resolved via Vite's internal proxying configuration.</li>
+        <li><strong>Currency API Latency:</strong> Mitigated using an in-memory caching layer with a 1-hour TTL and hardcoded offline fallback rates.</li>
+        <li><strong>Multi-Currency Normalization:</strong> Stored all monetary figures in base USD in the database and applied dynamic client-side conversions for display.</li>
+        <li><strong>Responsive Charting:</strong> Implemented responsive Recharts containers ensuring seamless layout adaptation across desktop and mobile viewports.</li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 13 & 14 -->
+    <div class="page-break">
+      <h2 class="chapter-title">13. LEARNING OUTCOMES AND SKILLS ACQUIRED</h2>
+      <p>The internship reinforced comprehensive full-stack development competencies:</p>
+      <ul>
+        <li><strong>Technical Mastery:</strong> React 18, Vite, Tailwind CSS, Node.js, Express.js, SQLite3, and Recharts.</li>
+        <li><strong>Engineering Best Practices:</strong> Parameterized SQL queries, modular controller-service separation, resilient third-party API integration, and clean code documentation.</li>
+        <li><strong>Professional Development:</strong> Systematic problem decomposition, time management across milestones, and technical report drafting.</li>
+      </ul>
+
+      <h2 class="chapter-title" style="margin-top: 40px;">14. CONCLUSION AND FUTURE SCOPE</h2>
+      <p>The <strong>SpendWise</strong> full-stack Expense Tracker and Financial Analytics Platform was successfully designed, developed, and verified. It provides a modern, intuitive, and responsive platform for managing personal finances. Future enhancements include multi-user JWT authentication, automated bank feed syncing, and mobile Progressive Web App (PWA) packaging.</p>
+
+      <div style="margin-top: 60px; padding: 20px; border: 1px solid #94a3b8; border-radius: 6px; background: #f8fafc;" class="text-center">
+        <p style="margin: 3px 0; font-weight: bold; font-size: 13pt;">INTERNSHIP REPORT SUBMISSION</p>
+        <p style="margin: 3px 0;"><strong>Student Name:</strong> Abinaya R</p>
+        <p style="margin: 3px 0;"><strong>Register Number:</strong> 511323205001</p>
+        <p style="margin: 3px 0;"><strong>Department:</strong> Department of Information Technology</p>
+        <p style="margin: 3px 0;"><strong>Institution:</strong> Kingston Engineering College, Vellore</p>
+        <p style="margin: 3px 0;"><strong>Affiliation:</strong> Anna University, Chennai</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
