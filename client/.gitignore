@@ -27,3 +27,11 @@ venv/
 __pycache__/
 .env
 dist/
+node_modules/
+.env
+dist/
+build/
+__pycache__/
+INTERNSHIP_REPORT.*
+make_docx.py
+*.docx
